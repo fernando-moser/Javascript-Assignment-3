@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>A3 - Using Objects</title>
+    <link href="https://fonts.googleapis.com/css?family=Carrois+Gothic|Open+Sans" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Carrois Gothic", serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        #content {
+            margin: auto;
+            width: 90%;
+            font-size: 1.1em;
+            line-height: 1.333em;
+        }
+
+        .important {
+            color: red;
+            font-weight: bold;
+        }
+
+        .faded {
+            font-weight: normal;
+            color: #AAA;
+        }
+
+        .highlight {
+            background-color: #CCCC99;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        h1 {
+            color: #FF6600;
+        }
+
+        h2 {
+            color: #003366;
+            border-bottom: #CCCC99 solid 1px;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-style: italic;
+        }
+
+        var {
+            font-family: "Consolas", monospace;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        code {
+            font-family: "Consolas", monospace;
+            font-style: normal;
+            background-color: #DDD;
+            padding: 0 2px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        aside {
+            float: right;
+            width: 35%;
+            font-family: serif;
+            font-size: 0.8em;
+            line-height: 1.4em;
+            padding: 0.5em;
+            margin: 10px 10px 0px 10px;
+            font-style: italic;
+            border: dashed 2px #BBBBDD;
+            background-color: #DDDDBB;
+        }
+
+        @media screen and (min-width: 800px) and (max-width: 1200px) {
+            #content {
+                width: 80%;
+                font-size: 1.25em;
+                line-height: 1.5em;
+            }
+        }
+
+        @media screen and (min-width: 1201px) {
+            #content {
+                max-width: 960px;
+                font-size: 1.4em;
+                line-height: 1.6em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+
+        <h1>Assignment 3 - Using Objects</h1>
+
+        <h2>Background</h2>
+
+        <p>The file "flights.json" contains flight objects in JSON format. Note that some objects have a "pilot" and/or "copilot" field, and some do not. Also, note that some pilots and copilots have nicknames, and some do not.</p>
+
+        <p>In JavaScript, if you refer to a field that does not exist, it is not an error; instead, the special value, <var>undefined</var>, is used. For example, suppose you have a flight object, <var>f</var>. If <var>f</var> has a pilot, then "f.pilot" refers to the pilot; but if <var>f</var> does not have a pilot, then "f.pilot" refers to <var>undefined</var>.</p>
+
+        <h2>Instructions</h2>
+
+        <ol>
+            <li>Design the basic page layout and the input panel with the flight search parameters.
+                <ul>
+                    <li>The "Day of Week" drop-down list (<code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> tags) should contain eight entries - the word "Any" and the seven days of the week.</li>
+                    <li>For the "Pilot" and "Co-Pilot" inputs, use <code>&lt;input type='checkbox'&gt;</code>.</li>
+                </ul>
+            </li>
+            <li>When the application starts, make an AJAX call to read the file "flights.json". <aside>Remember that an AJAX call requires a web server. Some editors, including <span class="title">Brackets</span>, have built-in servers, so you can run your code from there. Alternatively, if you have a web server running on your machine, you can copy your files to the server's folders.</aside> When the read completes:
+                <ol type="a">
+                    <li>Parse the data, and store it in a global variable, <var>allFlights</var>.</li>
+                    <li>Display a popup message to indicate that the application has finished reading the file.</li>
+                </ol>
+            </li>
+            <li>When the "Show All Flights" button is clicked, loop through <var>allFlights</var> and display the flights in a table. Match the provided samples as closely as possible. Also, display the number of flights in the parentheses beside the page title.</li>
+            <li>When the "Filter Results" button is clicked, create a new array that contains only the flights that match the active filters specified on the panel. (If multiple filters are active, they must all be met for a flight to be included in the new array.)
+
+                <p>Inactive filters can be ignored:</p>
+                <ul>
+                    <li>The filters for city, country, region, time min, and time max are inactive if empty.</li>
+                    <li>The filter for the day of the week is inactive if "Any" is selected.</li>
+                    <li>The filter for pilot and copilot are inactive if unchecked.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>Screen Shots</h2>
+
+        <h3>Opening Screen</h3>
+
+        <img src="1-openingScreen.png" alt="opening screen">
+
+        <h3>All Flights / No Filters</h3>
+
+        <img src="2-allFlights.png" alt="all flights">
+
+        <h3>One Filter</h3>
+
+        <img src="3-singleFilter.png" alt="one filter">
+
+        <h3>Two Filters</h3>
+
+        <img src="4-twoFilters.png" alt="two filters">
+
+        <h3>Three Filters</h3>
+
+        <img src="5-threeFilters.png" alt="three filters">
+
+        <br><br>
+        <hr>
+        <p>*** The End ***</p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3</title>
+    <script src="code.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<!--    data table-->
+    <section class="table">
+        <h1 id="fQuantity"></h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Destination</th>
+                    <th>Pilot</th>
+                    <th>Copilot</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+<!--    search painel-->
+    <section class="search">
+        <div class="row"><button id="btnAllFlights">All flights</button></div>
+        <div class="row">
+            <div class="col-40">
+                <label>City:</label>
+            </div>
+            <div class="col-60">
+                <input type="text" id="city">
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-40">
+                <label>Country:</label>
+            </div>
+            <div class="col-60">
+                <input type="text" id="country">
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-40">
+                <label>Region:</label>
+            </div>
+            <div class="col-60">
+                <input type="text" id="region">
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-40">
+                <label>Day of Week:</label>
+            </div>
+            <div class="col-60">
+                <select id="day">
+                    <option>Any</option>
+                    <option>Mon</option>
+                    <option>Tue</option>
+                    <option>Wed</option>
+                    <option>Thu</option>
+                    <option>Fri</option>
+                    <option>Sat</option>
+                    <option>Sun</option>
+                </select>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-40">
+                <label>Departure Time:</label>
+            </div>
+            <div class="col-60">
+                <label>Min</label>
+                <input type="number" id="min">
+                <label>Max</label>
+                <input type="number" id="max">
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-40">
+                <label>Required:</label>
+            </div>
+            <div class="col-60">
+                <input type="checkbox" id="pilot"><label>Pilot</label>
+                <input type="checkbox" id="co-pilot"><label>Co-Pilot</label>
+            </div>
+        </div>
+        <div class="row"><button id="btnSearch">Search</button></div>
+    </section>
+</body>
+
+</html>
