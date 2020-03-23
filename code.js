@@ -5,7 +5,6 @@ window.onload = function () {
     xhr.onreadystatechange = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
             allFlights = JSON.parse(xhr.responseText);
-            console.log(allFlights);
             alert('Finished reading the file');
             btnAllFlightHandler();
             btnSearchHandler();
@@ -69,114 +68,106 @@ function btnSearchHandler() {
         let inputPilot = document.getElementById('pilot').checked; //Pilot
         let inputCoPilot = document.getElementById('co-pilot').checked; //Co-Pilot
         
-        let results = new Set();
-        
         if(!inputCity && !inputCountry && !inputRegion && inputDay === 'Any' && !inputMin && !inputMax && !inputPilot && !inputCoPilot){
             buildPage(allFlights);
         } else {
             
+            let results = Array.from(allFlights.flights);
+            
             if(!!inputCity) {
-                let resCity = searchByCity(inputCity);
-                resCity.forEach(item => {
-                    results.add(item);
-                });
-            }
-            if(!!inputCountry) {
-                let resCountry = searchByCountry(inputCountry);
-                resCountry.forEach(item => {
-                    results.add(item);
-                });
-            }
-            if(inputRegion !== 0) {
-                let resRegion = searchByRegion(inputRegion);
-                resRegion.forEach(item => {
-                    results.add(item);
-                });
-            }
-            if(inputDay !== 'Any') {
-                let resDay = searchByDay(inputDay);
-                resDay.forEach(item => {
-                    results.add(item);
-                });
+                results = searchByCity(inputCity,results);
             }
             
-            let min = inputMin;
-            let max = inputMax;
+            if(!!inputCountry) {
+                results = searchByCountry(inputCountry,results);
+            }
+            
+            if(inputRegion !== 0) {
+                results = searchByRegion(inputRegion,results);
+            }
+            
+            if(inputDay !== 'Any') {
+                results = searchByDay(inputDay,results);
+            }
+            
             if(!!inputMin || !!inputMax) {
+                let min = inputMin;
+                let max = inputMax;
                 if (!!inputMin & !inputMax) {
                     max = 2400;
                 } 
                 if (!inputMin & !!inputMax) {
                     min = 1;
                 }
-                let resTime = searchByTime(min,max);
-                resTime.forEach(item => {
-                    results.add(item);
-                });
-            }
-            if(inputPilot) {
-                allFlights.flights.forEach(item => {
-                    if(item.pilot !== undefined) {
-                        results.add(item);
-                    }
-                });
-            }
-            if(inputCoPilot) {
-                allFlights.flights.forEach(item => {
-                    if(item.pilot !== undefined) {
-                        results.add(item);
-                    }
-                });
+                results = searchByTime(min,max,results);
             }
             
-            let arrayResult = Array.from(results);
-            let flights = {flights : arrayResult};
+            if(inputPilot) {
+                let temp = [];
+                results.forEach(item => {
+                    if(item.pilot !== undefined) {
+                        temp.push(item);
+                    }
+                });
+                results = temp;
+            }
+            if(inputCoPilot) {
+                console.log('passei');
+                let temp = [];
+                results.forEach(item => {
+                    if(item.copilot !== undefined) {
+                        temp.push(item);
+                    }
+                });
+                results = temp;
+            }
+            let flights = {flights : results};
             buildPage(flights);
         }
     })
 }
 
-function searchByCity(value) {
+function searchByCity(value,array) {
     let expression = new RegExp(value,'i');
     let results = [];
-    allFlights.flights.forEach(item => {
+    array.forEach(item => {
         if(expression.test(item.destination.city)) {
             results.push(item);
         }
     })
     return results;
 }
-function searchByCountry(value) {
+function searchByCountry(value,array) {
     let expression = new RegExp(value,'i');
     let results = [];
-    allFlights.flights.forEach(item => {
+    array.forEach(item => {
         if(expression.test(item.destination.country)) {
             results.push(item);
         }
     })
     return results;
 }
-function searchByRegion(value) {
+function searchByRegion(value,array) {
     let results = [];
-    allFlights.flights.forEach(item => {
+    array.forEach(item => {
         if(value === item.destination.region) {
             results.push(item);
         }
     })
     return results;
 }
-function searchByDay(value) {
+function searchByDay(value,array) {
     let results = [];
-    allFlights.flights.forEach(item => {
+    array.forEach(item => {
         if(value === item.dayOfWeek) {
             results.push(item);
         }
     })
     return results;
 }
-function searchByTime(min, max) {
+function searchByTime(min, max, array) {
     let results = [];
-    allFlights.flights.forEach(item => {
+    array.forEach(item => {
         if(item.departureTime >= min && item.departureTime <= max) {
             results.push(item);
         }
