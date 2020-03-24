@@ -112,7 +112,6 @@ function btnSearchHandler() {
                 results = temp;
             }
             if(inputCoPilot) {
-                console.log('passei');
                 let temp = [];
                 results.forEach(item => {
                     if(item.copilot !== undefined) {
